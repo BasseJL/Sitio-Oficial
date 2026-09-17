@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BASSE - Tienda Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #040811;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Estrellas fugaces */
+        .night {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            transform: rotateZ(45deg);
+            z-index: -1;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .shooting_star {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 2px;
+            background: linear-gradient(-45deg, #ffffff, rgba(0, 0, 255, 0));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px #ffffff);
+            animation: tail 3000ms ease-in-out infinite, shooting 3000ms ease-in-out infinite;
+        }
+        .shooting_star::before, .shooting_star::after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 1px);
+            right: 0;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(0, 0, 255, 0), #ffffff, rgba(0, 0, 255, 0));
+            transform: translateX(50%) rotateZ(45deg);
+            border-radius: 100%;
+            animation: shining 3000ms ease-in-out infinite;
+        }
+        .shooting_star::after { transform: translateX(50%) rotateZ(-45deg); }
+        @keyframes tail { 0% { width: 0; } 30% { width: 100px; } 100% { width: 0; } }
+        @keyframes shining { 0% { width: 0; } 50% { width: 30px; } 100% { width: 0; } }
+        @keyframes shooting { 0% { transform: translateX(0); } 100% { transform: translateX(300px); } }
+        .shooting_star:nth-child(1) { top: calc(50% - 200px); left: calc(50% - 300px); animation-delay: 0ms; }
+        .shooting_star:nth-child(2) { top: calc(50% - 100px); left: calc(50% + 100px); animation-delay: 1500ms; }
+        .shooting_star:nth-child(3) { top: calc(50% + 100px); left: calc(50% - 200px); animation-delay: 3500ms; }
+        .shooting_star:nth-child(4) { top: calc(50% + 250px); left: calc(50% + 50px); animation-delay: 5000ms; }
+        .shooting_star:nth-child(5) { top: calc(50% - 300px); left: calc(50% - 50px); animation-delay: 7000ms; }
+
+        .banner-madre {
+            background: linear-gradient(135deg, #121e33 0%, #0a1120 100%);
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .font-serif-title { font-family: 'Playfair Display', serif; }
+
+        .product-card {
+            background-color: #0b1320;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+        .product-card:hover { transform: translateY(-5px); }
+        .image-box { background-color: #ffffff; padding: 1rem; position: relative; }
+        
+        .category-line {
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6 0%, #f97316 50%, transparent 100%);
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .modal { opacity: 0; visibility: hidden; transition: all 0.3s ease-in-out; }
+        .modal.active { opacity: 1; visibility: visible; }
+        .modal-content { transform: scale(0.95); transition: all 0.3s ease-in-out; }
+        .modal.active .modal-content { transform: scale(1); }
+        
+        .color-swatch { transition: transform 0.1s; cursor: pointer; border: 1px solid #d1d5db; }
+        .color-swatch:hover { transform: scale(1.1); }
+        .color-swatch.active { border: 2px solid #3b82f6; transform: scale(1.1); box-shadow: 0 0 8px rgba(59,130,246,0.8); }
+        
+        .tech-thumb { transition: all 0.2s; cursor: pointer; border: 2px solid transparent; border-radius: 4px; overflow: hidden; opacity: 0.6; }
+        .tech-thumb:hover { opacity: 1; }
+        .tech-thumb.active { border-color: #3b82f6; opacity: 1; box-shadow: 0 0 8px rgba(59,130,246,0.5); }
+        
+        /* Ocultar barra de scroll en carrito */
+        #cart-items::-webkit-scrollbar { width: 6px; }
+        #cart-items::-webkit-scrollbar-track { background: transparent; }
+        #cart-items::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Estrellas -->
+    <div class="night">
+        <div class="shooting_star"></div><div class="shooting_star"></div><div class="shooting_star"></div>
+        <div class="shooting_star"></div><div class="shooting_star"></div>
+    </div>
+
+    <!-- OVERLAY DEL CARRITO -->
+    <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] hidden"></div>
+
+    <!-- Botón Flotante WhatsApp -->
+    <a href="https://wa.me/1151196850?text=Hola,%20tengo%20una%20consulta%20desde%20la%20página%20web" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-[0_4px_10px_rgba(37,211,102,0.5)] hover:scale-110 transition-transform z-[80]">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header Principal -->
+    <header class="w-full bg-[#040811]/95 backdrop-blur-sm border-b border-white/10 fixed top-0 z-[85]">
+        <div class="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+            <a href="#" class="text-2xl font-extrabold tracking-wider text-white flex items-center">
+                <i class="fas fa-bolt text-blue-500 mr-2"></i> BASSE
+            </a>
+            
+            <div class="flex-1 max-w-xl mx-8 hidden md:flex">
+                <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Buscar productos (ej. Termo, Gorro Urbano)..." class="w-full bg-[#0b1320] border border-white/10 rounded-l-md py-2 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 text-sm">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 rounded-r-md font-bold text-sm transition">BUSCAR</button>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <div class="hidden md:flex items-center space-x-2">
+                    <i class="fas fa-handshake text-xl text-blue-400"></i>
+                    <div class="text-right">
+                        <p class="text-[12px] font-bold leading-none text-white uppercase">Mercado<br>Pago</p>
+                    </div>
+                </div>
+                <!-- Botón para abrir Carrito -->
+                <div onclick="toggleCart()" class="relative text-white hover:text-blue-400 transition text-xl cursor-pointer">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-blue-500 text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold shadow-lg">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="border-t border-white/5 bg-[#040811]">
+            <div class="container mx-auto px-4 flex justify-center">
+                <ul class="flex space-x-8 text-xs font-semibold py-3 text-gray-300">
+                    <li><a href="#gorros" class="hover:text-white flex items-center transition">Categorías <i class="fas fa-chevron-down ml-1 text-[10px]"></i></a></li>
+                    <li><a href="#termos" class="hover:text-white transition">Tienda Oficial</a></li>
+                    <li><a href="#verano" class="hover:text-white transition">Verano</a></li>
+                    <li><a href="https://wa.me/1151196850?text=Hola,%20necesito%20ayuda%20o%20tengo%20una%20consulta%20sobre%20los%20productos." target="_blank" class="hover:text-white transition">Ayuda</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="h-32"></div>
+
+    <div class="container mx-auto px-4 py-6 max-w-6xl space-y-12">
+        
+        <!-- Banner Día de la Madre -->
+        <div class="banner-madre rounded-2xl p-8 md:p-12 flex flex-col md:flex-row justify-between items-center relative overflow-hidden">
+            <div class="z-10 text-left">
+                <p class="text-blue-400 text-xs font-bold tracking-widest uppercase mb-2">EDICIÓN ESPECIAL</p>
+                <h1 class="font-serif-title text-4xl md:text-6xl font-bold text-white mb-2 italic">¡FELIZ DÍA DE<br>LA MADRE!</h1>
+                <p class="text-gray-300 text-sm tracking-wide mb-6 uppercase">REGALÁ CALIDAD Y DISEÑO CON EL CORAZÓN</p>
+                <div class="inline-flex items-center bg-[#0a1526] border border-blue-900/50 rounded p-2">
+                    <i class="far fa-calendar-alt text-blue-400 text-xl mr-3"></i>
+                    <div>
+                        <p class="text-[10px] text-gray-400 leading-none">Fecha Especial</p>
+                        <p class="text-xs font-bold text-white leading-none mt-1">18 de OCTUBRE, 2026</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden">
+                <div class="absolute top-10 left-1/3 transform -rotate-12 opacity-80">
+                    <i class="fas fa-hat-cowboy text-4xl text-blue-400 drop-shadow-[0_0_15px_rgba(96,165,250,0.5)]"></i>
+                </div>
+                <div class="absolute top-20 right-1/4 transform rotate-12 opacity-80">
+                    <i class="fas fa-headphones text-5xl text-purple-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]"></i>
+                </div>
+                <div class="absolute bottom-10 right-20 transform -rotate-12 opacity-80">
+                    <i class="fas fa-wine-bottle text-4xl text-orange-500 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]"></i>
+                </div>
+                <div class="absolute bottom-1/4 right-1/3 transform rotate-6 opacity-80">
+                    <i class="fas fa-volume-up text-3xl text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.5)]"></i>
+                </div>
+                <div class="absolute top-1/3 right-10 transform -rotate-6 opacity-80">
+                    <i class="fas fa-clock text-4xl text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]"></i>
+                </div>
+                <div class="absolute bottom-5 left-1/2 transform rotate-12 opacity-80">
+                    <i class="fas fa-mug-hot text-4xl text-red-400 drop-shadow-[0_0_15px_rgba(248,113,113,0.5)]"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= GORROS Y GORRAS ================= -->
+        <section id="gorros" class="pt-4">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-hat-cowboy text-blue-400 mr-2"></i> Gorros y Gorras
+                </h2>
+                <div class="category-line"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="productList1">
+                <div class="product-card flex flex-col" onclick="openModal('modal-six')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.13 (1).jpeg" alt="Gorro Six Classic" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">GORRO SIX CLASSIC</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 2.10</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col" onclick="openModal('modal-legion')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.07 (3).jpeg" alt="Gorro Legión" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">GORRO LEGIÓN</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 1.65</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col relative" onclick="openModal('modal-borin')">
+                    <div class="absolute top-0 left-0 bg-teal-500 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">DESTACADO</div>
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="85617585-6fe4-42da-9b62-9a62b7be68a9.jpg" alt="Gorro Borin" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">GORRO BORIN</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 2.40</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col relative" onclick="openModal('modal-flex')">
+                    <div class="absolute top-0 left-0 bg-blue-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">FLEX FIT</div>
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.21 (1).jpeg" alt="Gorro Flex" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">GORRO FLEX</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 1.98</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col" onclick="openModal('modal-urbano')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.22.jpeg" alt="Gorro Urbano" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">GORRO URBANO</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 2.50</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col relative" onclick="openModal('modal-trucker')">
+                    <div class="absolute top-0 left-0 bg-purple-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">MÁS VENDIDO</div>
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="3e20c8ed-809b-4b1b-b205-72c246cf3fa7.jpg" alt="Gorro Trucker" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">GORRO TRUCKER</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 1.20</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col relative" onclick="openModal('modal-tc')">
+                    <div class="absolute top-0 left-0 bg-green-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">BASSIC</div>
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.12 (1).jpeg" alt="Gorro TC Bassic" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">GORRO TC BASSIC</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 1.25</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TERMOS Y VASOS ================= -->
+        <section id="termos" class="pt-4">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-mug-hot text-orange-500 mr-2"></i> Termos y Vasos
+                </h2>
+                <div class="category-line"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="productList2">
+                <div class="product-card flex flex-col" onclick="openModal('modal-termo-prime')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.54.jpeg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">TERMO ACERO PRIME</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 11.98</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col" onclick="openModal('modal-termo-medio')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="termo-medio-negro.jpg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">TERMO 1/2 LITRO</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 9.78</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col" onclick="openModal('modal-brandly')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.56.jpeg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">TERMO BRANDLY</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 16.98</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col" onclick="openModal('modal-duglas')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.56 (1).jpeg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">VASO DUGLAS</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 3.80</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col" onclick="openModal('modal-trek')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.57.jpeg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">VASO TERMICO TREK</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 13.64</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col relative" onclick="openModal('modal-kelprer')">
+                    <div class="absolute top-0 left-0 bg-purple-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">1050 ML</div>
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="cdb6e462-e080-49cf-a20e-e1e73b03d0a7.jpg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
+                        <h3 class="text-sm font-bold text-white mb-1">VASO TERMICO KELPRER</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 22.11</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TECNOLOGÍA Y HOGAR ================= -->
+        <section id="tecnologia" class="pt-4">
+            <div class="mb-6">
+                <h2 class="text-xl font-bold text-white flex items-center">
+                    <i class="fas fa-microchip text-teal-400 mr-2"></i> Tecnología y Hogar
+                </h2>
+                <div class="category-line"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="productList3">
+                <div class="product-card flex flex-col" onclick="openModal('modal-sacacorchos')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.42.29.jpeg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-teal-400 uppercase font-bold mb-1">TECNOLOGÍA</p>
+                        <h3 class="text-sm font-bold text-white mb-1">SACA CORCHOS AUTO</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 29.98</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col" onclick="openModal('modal-parlante')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.42.31 (2).jpeg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-teal-400 uppercase font-bold mb-1">TECNOLOGÍA</p>
+                        <h3 class="text-sm font-bold text-white mb-1">PARLANTE BLACKPUNK</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 33.90</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col relative" onclick="openModal('modal-auriculares')">
+                    <div class="absolute top-0 left-0 bg-yellow-500 text-black text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">NUEVO</div>
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.42.29 (2).jpeg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-teal-400 uppercase font-bold mb-1">TECNOLOGÍA</p>
+                        <h3 class="text-sm font-bold text-white mb-1">AURICULARES SQUARE</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 14.50</p>
+                    </div>
+                </div>
+
+                <div class="product-card flex flex-col" onclick="openModal('modal-reloj')">
+                    <div class="image-box h-56 flex items-center justify-center">
+                        <img src="WhatsApp Image 2026-09-15 at 20.42.32.jpeg" class="max-h-full object-contain">
+                    </div>
+                    <div class="p-4 flex flex-col flex-1">
+                        <p class="text-[10px] text-teal-400 uppercase font-bold mb-1">HOGAR</p>
+                        <h3 class="text-sm font-bold text-white mb-1">RELOJ O´CLOCK</h3>
+                        <p class="text-xs text-white font-bold mb-2">USD 4.70</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- PRE-FOOTER -->
+    <div class="mt-20 border-t border-white/10 pt-16 bg-[#040811]">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl font-extrabold text-white text-center mb-10"><span class="text-[#3b82f6]">¡Llevá tu tecnología</span> a otro nivel con BASSE!</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Tarjeta Auriculares -->
+                <div class="bg-[#0f172a] border border-white/5 rounded-lg p-8 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <p class="text-[10px] text-teal-400 font-bold uppercase tracking-wider mb-2">AUDIO PREMIUM</p>
+                        <h3 class="text-2xl font-bold text-white mb-2">Auriculares Square</h3>
+                        <p class="text-sm text-gray-400 mb-6">Tecnología ENC y Bluetooth 5.3. Display digital iluminado de carga. Control One touch.</p>
+                    </div>
+                    <button onclick="openModal('modal-auriculares')" class="bg-[#0ea5e9] hover:bg-blue-500 text-white font-bold py-2 px-6 rounded w-max transition shadow-md">Ver Producto</button>
+                </div>
+                <!-- Tarjeta Parlante -->
+                <div class="bg-[#0f172a] border border-white/5 rounded-lg p-8 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <p class="text-[10px] text-teal-400 font-bold uppercase tracking-wider mb-2">SONIDO PORTÁTIL</p>
+                        <h3 class="text-2xl font-bold text-white mb-2">Parlante Blackpunk</h3>
+                        <p class="text-sm text-gray-400 mb-6">Parlante inalámbrico bluetooth con soporte porta celular, lector Micro SD, USB, y radio FM.</p>
+                    </div>
+                    <button onclick="openModal('modal-parlante')" class="bg-[#0ea5e9] hover:bg-blue-500 text-white font-bold py-2 px-6 rounded w-max transition shadow-md">Ver Producto</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <div class="container mx-auto px-4 py-20 max-w-4xl">
+        <h2 class="text-2xl font-bold text-white mb-8 text-center"><i class="fas fa-question-circle text-blue-500 mr-2"></i> Preguntas Frecuentes</h2>
+        <div class="space-y-4">
+            <div class="bg-[#0b1320] border border-white/10 rounded-lg p-6">
+                <h3 class="text-lg font-bold text-white mb-2">¿Cómo realizo una compra?</h3>
+                <p class="text-gray-400 text-sm">Navegá por nuestro catálogo, elegí los productos que te interesan y agregalos a tu carrito. Cuando termines, abrí el carrito y hacé clic en "Enviar Pedido a WhatsApp". Esto nos enviará el detalle exacto para que un asesor coordine el pago y envío con vos.</p>
+            </div>
+            <div class="bg-[#0b1320] border border-white/10 rounded-lg p-6">
+                <h3 class="text-lg font-bold text-white mb-2">¿Cuáles son los métodos de pago?</h3>
+                <p class="text-gray-400 text-sm">Aceptamos transferencia bancaria, depósito, Mercado Pago y pagos en efectivo. Una vez que confirmemos el stock y tu pedido por WhatsApp, te brindaremos los datos para realizar el pago de forma segura.</p>
+            </div>
+            <div class="bg-[#0b1320] border border-white/10 rounded-lg p-6">
+                <h3 class="text-lg font-bold text-white mb-2">¿Realizan envíos a todo el país?</h3>
+                <p class="text-gray-400 text-sm">¡Sí! Hacemos envíos a toda la Argentina. El costo y el método de envío (por correo o expreso) lo coordinamos de manera personalizada al momento de confirmar tu pedido.</p>
+            </div>
+            <div class="bg-[#0b1320] border border-white/10 rounded-lg p-6">
+                <h3 class="text-lg font-bold text-white mb-2">¿Se pueden personalizar los productos con mi logo?</h3>
+                <p class="text-gray-400 text-sm">Absolutamente. La mayoría de nuestros productos admiten métodos de impresión como Serigrafía, Láser, Sublimación, Vinilo o Bordado. Consultá los mínimos requeridos por WhatsApp.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER / PIE DE PÁGINA -->
+    <footer class="bg-[#020408] border-t border-white/10 pt-12 pb-8">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Marca -->
+                <div>
+                    <h4 class="text-xl font-extrabold text-white mb-4 flex items-center"><i class="fas fa-bolt text-blue-500 mr-2"></i> BASSE</h4>
+                    <p class="text-gray-400 text-sm">Especialistas en artículos promocionales, merchandising corporativo y tecnología. Llevamos tu marca al siguiente nivel.</p>
+                </div>
+                <!-- Menú rápido -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Navegación</h4>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><a href="#gorros" class="hover:text-blue-400 transition">Gorros y Gorras</a></li>
+                        <li><a href="#termos" class="hover:text-blue-400 transition">Termos y Vasos</a></li>
+                        <li><a href="#tecnologia" class="hover:text-blue-400 transition">Tecnología y Hogar</a></li>
+                    </ul>
+                </div>
+                <!-- Legal -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Información Legal</h4>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition">Términos y Condiciones</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Políticas de Privacidad</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Políticas de Devolución</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition">Defensa del Consumidor</a></li>
+                    </ul>
+                </div>
+                <!-- Contacto -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contacto Directo</h4>
+                    <ul class="text-gray-400 text-sm space-y-3">
+                        <li>
+                            <a href="https://wa.me/1151196850" target="_blank" class="flex items-center hover:text-green-400 transition">
+                                <i class="fab fa-whatsapp text-green-500 mr-2 text-lg"></i> 11 5119-6850
+                            </a>
+                        </li>
+                        <li class="flex items-center"><i class="far fa-envelope text-blue-500 mr-2"></i> ventas@basse.com</li>
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i> Buenos Aires, Argentina</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 text-center text-gray-500 text-xs">
+                <p>&copy; 2026 BASSE Tienda Oficial. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ========================================== -->
+    <!-- MODALS CON CARRITO INTEGRAD0 -->
+    <!-- ========================================== -->
+
+    <!-- MODAL SIX CLASSIC -->
+    <div id="modal-six" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-six')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-six" src="WhatsApp Image 2026-09-15 at 20.41.13 (1).jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.11 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#800020] border border-gray-300" title="Bordó"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.11.jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#00aa55] border border-gray-300" title="Verde"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.13 (1).jpeg', this, 'img-six')" class="color-swatch active w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-300" title="Beige"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-gray-100 border border-gray-300" title="Blanco"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14 (2).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#013220] border border-gray-300" title="Verde Oscuro"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#d1d5db] border border-gray-300" title="Gris Claro"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (2).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300" title="Negro"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (3).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#4b4f54] border border-gray-300" title="Gris Oscuro"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.16 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-300" title="Azul"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.16.jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#dc2626] border border-gray-300" title="Rojo"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-six')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Six Classic</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 2.10</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro 6 gajos poliéster con hebilla metálica ajustable. Ideal para merchandising corporativo.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('six', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-six" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('six', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('six', 'Gorro Six Classic', 2.10, 'img-six')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL LEGIÓN -->
+    <div id="modal-legion" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-legion')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-legion" src="WhatsApp Image 2026-09-15 at 20.41.07 (3).jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.03 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#0a192f] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#d2b48c] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-400 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-100 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.05.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-300 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#800020] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-blue-500 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-green-700 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#0f172a] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (3).jpeg', this, 'img-legion')" class="color-swatch active w-6 h-6 rounded-sm bg-red-600 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-black border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.08.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gradient-to-b from-white to-black border border-gray-400"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-legion')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Legión</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 1.65</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro trucker de 5 gajos con red trasera fresca y cierre ajustable a presión.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('legion', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-legion" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('legion', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('legion', 'Gorro Legión', 1.65, 'img-legion')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL BORIN -->
+    <div id="modal-borin" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-borin')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-borin" src="85617585-6fe4-42da-9b62-9a62b7be68a9.jpg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button onclick="changeColor('85617585-6fe4-42da-9b62-9a62b7be68a9.jpg', this, 'img-borin')" class="color-swatch active w-8 h-8 rounded-sm bg-[#800020] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.18 (1).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.18.jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (1).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-gray-500 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (2).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-gray-200 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19.jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-borin')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Borin</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 2.40</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro trucker de 6 gajos con panel frontal reforzado.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('borin', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-borin" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('borin', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('borin', 'Gorro Borin', 2.40, 'img-borin')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FLEX -->
+    <div id="modal-flex" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-flex')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-flex" src="WhatsApp Image 2026-09-15 at 20.41.21 (1).jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (3).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-gradient-to-r from-red-500 to-blue-500 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (1).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (2).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-gray-600 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (3).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.21 (1).jpeg', this, 'img-flex')" class="color-swatch active w-8 h-8 rounded-sm bg-green-700 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.21.jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-flex')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Flex</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 1.98</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro cerrado de alta calidad con banda elástica interna para ajuste perfecto.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('flex', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-flex" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('flex', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('flex', 'Gorro Flex', 1.98, 'img-flex')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL URBANO -->
+    <div id="modal-urbano" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-urbano')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-urbano" src="WhatsApp Image 2026-09-15 at 20.41.22.jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button onclick="changeColor('84c16944-9d59-4800-bc75-7cfca4d15eb3.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
+                    <button onclick="changeColor('91c83b0e-1266-4027-9f7f-958d8c3ebb19.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-300"></button>
+                    <button onclick="changeColor('310c928f-192d-41d7-83e2-1cd67cb55760.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-300"></button>
+                    <button onclick="changeColor('882dc6ed-7961-4262-9ae4-6c31c597ec5c.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.22.jpeg', this, 'img-urbano')" class="color-swatch active w-8 h-8 rounded-sm bg-pink-400 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.23 (1).jpeg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-[#800020] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.23.jpeg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-green-700 border border-gray-300"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-urbano')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Urbano</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 2.50</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro de gabardina premium con cierre ajustable de hebilla metálica trasera.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('urbano', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-urbano" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('urbano', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('urbano', 'Gorro Urbano', 2.50, 'img-urbano')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TRUCKER -->
+    <div id="modal-trucker" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-trucker')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-trucker" src="3e20c8ed-809b-4b1b-b205-72c246cf3fa7.jpg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button onclick="changeColor('3e20c8ed-809b-4b1b-b205-72c246cf3fa7.jpg', this, 'img-trucker')" class="color-swatch active w-8 h-8 rounded-sm bg-green-500 border border-gray-300"></button>
+                    <button onclick="changeColor('530f450b-ebc2-4777-a54d-7983cbb8663b.jpg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (1).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (2).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (3).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17.jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-gradient-to-r from-blue-900 via-white to-red-600 border border-gray-300"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-trucker')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Trucker</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 1.20</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Diseñado con panel frontal de poliéster blanco especial para sublimación y red trasera.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('trucker', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-trucker" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('trucker', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('trucker', 'Gorro Trucker', 1.20, 'img-trucker')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TC BASSIC -->
+    <div id="modal-tc" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-tc')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-tc" src="WhatsApp Image 2026-09-15 at 20.41.12 (1).jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12 (1).jpeg', this, 'img-tc')" class="color-swatch active w-8 h-8 rounded-sm bg-yellow-400 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12 (2).jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.13.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-blue-500 border border-gray-300"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-tc')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">GORRO TC BASSIC</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 1.25</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro 5 gajos poliéster con cierre velcro.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('tc', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-tc" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('tc', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('tc', 'Gorro TC Bassic', 1.25, 'img-tc')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODALS: TERMOS Y VASOS -->
+    <!-- ========================================== -->
+
+    <!-- MODAL TERMO ACERO PRIME -->
+    <div id="modal-termo-prime" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-termo-prime')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-prime" src="WhatsApp Image 2026-09-15 at 20.41.54.jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54.jpeg', this, 'img-prime')" class="color-swatch active w-8 h-8 rounded-sm bg-gray-800 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54 (1).jpeg', this, 'img-prime')" class="color-swatch w-8 h-8 rounded-sm bg-white border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54 (2).jpeg', this, 'img-prime')" class="color-swatch w-8 h-8 rounded-sm bg-[#9ca3af] border border-gray-300"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-termo-prime')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">TERMO ACERO PRIME</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 11.98</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Termo de acero inoxidable 1 litro. Práctico tapón hermético matero. Mantiene calor x 24 hs.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('prime', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-prime" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('prime', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('prime', 'Termo Acero Prime', 11.98, 'img-prime')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TERMO MEDIO LITRO -->
+    <div id="modal-termo-medio" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-termo-medio')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-medio" src="termo-medio-negro.jpg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button onclick="changeColor('termo-medio-negro.jpg', this, 'img-medio')" class="color-swatch active w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
+                    <button onclick="changeColor('termo-medio-acero.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-[#9ca3af] border border-gray-300"></button>
+                    <button onclick="changeColor('termo-medio-blanco.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-white border border-gray-300"></button>
+                    <button onclick="changeColor('termo-medio-azul.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-termo-medio')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">TERMO 1/2 LITRO</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 9.78</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Termo de acero inoxidable 1/2 litro. Práctico tapón hermético matero.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('medio', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-medio" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('medio', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('medio', 'Termo 1/2 Litro', 9.78, 'img-medio')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL BRANDLY -->
+    <div id="modal-brandly" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-brandly')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-brandly" src="WhatsApp Image 2026-09-15 at 20.41.56.jpeg" class="max-h-full object-contain">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-brandly')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">TERMO BRANDLY</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 16.98</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Termo de acero inox con doble capa. Tapón cebador 360 grados. Capacidad 1.2L.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('brandly', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-brandly" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('brandly', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('brandly', 'Termo Brandly', 16.98, 'img-brandly')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DUGLAS -->
+    <div id="modal-duglas" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-duglas')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-duglas" src="WhatsApp Image 2026-09-15 at 20.41.56 (1).jpeg" class="max-h-full object-contain">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-duglas')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">VASO DUGLAS</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 3.80</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Vaso de acero con tapa de silicona. Cobertura antideslizante. Capacidad 500 cc.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('duglas', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-duglas" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('duglas', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('duglas', 'Vaso Duglas', 3.80, 'img-duglas')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL VASO TREK -->
+    <div id="modal-trek" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-trek')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-trek" src="WhatsApp Image 2026-09-15 at 20.41.57.jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+                <div class="flex flex-wrap gap-4 justify-center mt-2">
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.57.jpeg', this, 'img-trek')" class="tech-thumb active w-14 h-14 bg-white border border-gray-200 p-1">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.57.jpeg" class="max-h-full object-contain">
+                    </button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.57 (1).jpeg', this, 'img-trek')" class="tech-thumb w-14 h-14 bg-white border border-gray-200 p-1">
+                        <img src="WhatsApp Image 2026-09-15 at 20.41.57 (1).jpeg" class="max-h-full object-contain">
+                    </button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative overflow-y-auto" style="max-height: 90vh;">
+                <button onclick="closeModal('modal-trek')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">VASO TERMICO TREK</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 13.64</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Vaso térmico aislado al vacío. Mantiene calientes por 12hs y frías por 6hs.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('trek', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-trek" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('trek', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('trek', 'Vaso Termico Trek', 13.64, 'img-trek')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL VASO KELPRER -->
+    <div id="modal-kelprer" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-kelprer')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-kelprer" src="cdb6e462-e080-49cf-a20e-e1e73b03d0a7.jpg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative overflow-y-auto" style="max-height: 90vh;">
+                <button onclick="closeModal('modal-kelprer')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">VASO TERMICO KELPRER</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-4">USD 22.11</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Vaso térmico estilo americano. Capacidad 1050 ML.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('kelprer', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-kelprer" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('kelprer', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('kelprer', 'Vaso Termico Kelprer', 22.11, 'img-kelprer')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MODALS DE TECNOLOGÍA Y HOGAR -->
+    <!-- ========================================== -->
+
+    <!-- MODAL SACACORCHOS -->
+    <div id="modal-sacacorchos" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-sacacorchos')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-saca" src="WhatsApp Image 2026-09-15 at 20.42.29.jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-sacacorchos')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">SACA CORCHOS AUTO</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 29.98</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Sacacorchos de vino automático con cortador de lámina de aluminio. Batería recargable USB incluida.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('sacacorchos', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-sacacorchos" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('sacacorchos', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('sacacorchos', 'Saca Corchos Auto', 29.98, 'img-saca')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARLANTE -->
+    <div id="modal-parlante" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-parlante')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-parlante" src="WhatsApp Image 2026-09-15 at 20.42.31 (2).jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-parlante')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">PARLANTE BLACKPUNK</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 33.90</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Parlante inalámbrico bluetooth con soporte porta celular, lector Micro SD, USB y radio FM.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('parlante', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-parlante" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('parlante', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('parlante', 'Parlante Blackpunk', 33.90, 'img-parlante')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL AURICULARES -->
+    <div id="modal-auriculares" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-auriculares')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-auri" src="WhatsApp Image 2026-09-15 at 20.42.29 (2).jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-auriculares')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">AURICULARES SQUARE</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 14.50</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Auriculares airbuds SQUARE con display digital iluminado de carga. Tecnología ENC.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('auriculares', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-auriculares" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('auriculares', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('auriculares', 'Auriculares Square', 14.50, 'img-auri')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RELOJ -->
+    <div id="modal-reloj" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-reloj')"></div>
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
+            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
+                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+                    <img id="img-reloj" src="WhatsApp Image 2026-09-15 at 20.42.32.jpeg" class="max-h-full object-contain transition-opacity duration-300">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+                <button onclick="closeModal('modal-reloj')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
+                <h2 class="text-3xl font-extrabold mb-2 text-white">RELOJ O´CLOCK</h2>
+                <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 4.70</p>
+                <p class="text-gray-400 mb-4 text-sm leading-relaxed">Reloj análogo de pared color blanco material plástico. Segundero silencioso.</p>
+                
+                <!-- Controles Carrito -->
+                <div class="flex items-center gap-4 mb-4 mt-auto">
+                    <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
+                    <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
+                        <button onclick="changeQuantityModal('reloj', -1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">-</button>
+                        <input type="text" id="qty-reloj" value="1" readonly class="w-12 text-center bg-transparent text-white border-x border-gray-600 py-2 text-sm font-bold">
+                        <button onclick="changeQuantityModal('reloj', 1)" class="px-4 py-2 text-gray-300 hover:bg-gray-700 transition">+</button>
+                    </div>
+                </div>
+                <button onclick="addToCart('reloj', 'Reloj O´clock', 4.70, 'img-reloj')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded text-center transition flex justify-center items-center shadow-lg">
+                    <i class="fas fa-cart-plus mr-2 text-lg"></i> Agregar al Carrito
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PANEL LATERAL DEL CARRITO (DRAWER) -->
+    <!-- ========================================== -->
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-[#040811] border-l border-white/10 shadow-2xl transform translate-x-full transition-transform duration-300 z-[100] flex flex-col">
+        <div class="p-6 border-b border-white/10 flex justify-between items-center bg-[#0a1120]">
+            <h2 class="text-xl font-bold text-white flex items-center"><i class="fas fa-shopping-cart text-blue-500 mr-2"></i> Mi Pedido</h2>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-white transition text-2xl"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Los productos se inyectan acá por JS -->
+            <p class="text-gray-400 text-center py-8">Tu carrito está vacío.</p>
+        </div>
+        
+        <div class="p-6 border-t border-white/10 bg-[#0a1120]">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-gray-300 font-bold">TOTAL ESTIMADO:</span>
+                <span id="cart-total" class="text-2xl font-extrabold text-[#3b82f6]">USD 0.00</span>
+            </div>
+            <button onclick="sendOrderToWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded-lg text-center transition flex justify-center items-center shadow-lg text-lg">
+                <i class="fab fa-whatsapp mr-2 text-2xl"></i> Enviar Pedido a WhatsApp
+            </button>
+            <p class="text-xs text-gray-500 text-center mt-3">Al confirmar, serás redirigido a WhatsApp para coordinar el pago, personalización y envío de forma segura.</p>
+        </div>
+    </div>
+
+
+    <script>
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+            // Reset quantity to 1 when modal closes
+            const qtyInputs = document.querySelectorAll(`[id^='qty-']`);
+            qtyInputs.forEach(input => input.value = 1);
+        }
+        
+        function changeColor(imgSrc, element, imgElementId) {
+            const mainImage = document.getElementById(imgElementId);
+            mainImage.style.opacity = '0';
+            setTimeout(() => {
+                mainImage.src = imgSrc;
+                mainImage.style.opacity = '1';
+            }, 150);
+
+            const swatches = element.parentElement.querySelectorAll('.color-swatch, .tech-thumb');
+            swatches.forEach(swatch => swatch.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function searchProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.product-card');
+            
+            cards.forEach(function(card) {
+                let textContent = card.innerText.toLowerCase();
+                if (textContent.includes(input)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+
+        // ==========================================
+        // LÓGICA DEL CARRITO DE COMPRAS
+        // ==========================================
+        let cart = [];
+
+        // Cambiar cantidad dentro del modal
+        function changeQuantityModal(id, delta) {
+            const input = document.getElementById(`qty-${id}`);
+            let val = parseInt(input.value) + delta;
+            if (val < 1) val = 1;
+            input.value = val;
+        }
+
+        // Abrir/Cerrar menú lateral del carrito
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-overlay');
+            
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Agregar al carrito
+        function addToCart(id, name, price, imageId) {
+            const qtyInput = document.getElementById(`qty-${id}`);
+            const quantity = parseInt(qtyInput.value);
+            const imgElement = document.getElementById(imageId);
+            const image = imgElement ? imgElement.src : '';
+
+            // Verificar si ya existe el producto con la misma foto/color
+            const existingItemIndex = cart.findIndex(item => item.id === id && item.image === image);
+            
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                cart.push({ id, name, price, quantity, image });
+            }
+
+            // Reiniciar contador modal
+            qtyInput.value = 1;
+
+            updateCartUI();
+            closeModal(`modal-${id}`);
+            toggleCart(); // Abre el carrito automáticamente para mostrar lo agregado
+        }
+
+        // Modificar cantidad dentro del carrito
+        function updateCartQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity < 1) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        // Eliminar del carrito
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Renderizar el carrito en HTML
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total');
+            const cartBadge = document.getElementById('cart-badge');
+
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+            let count = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-gray-400 text-center py-8">Tu carrito está vacío.</p>';
+            }
+
+            cart.forEach((item, index) => {
+                let subtotal = item.price * item.quantity;
+                total += subtotal;
+                count += item.quantity;
+
+                cartItemsContainer.innerHTML += `
+                    <div class="flex items-center gap-4 bg-[#0f172a] p-3 rounded-lg border border-white/5 relative">
+                        <img src="${item.image}" class="w-16 h-16 object-contain bg-white rounded p-1">
+                        <div class="flex-1">
+                            <h4 class="text-sm font-bold text-white leading-tight mb-1">${item.name}</h4>
+                            <p class="text-blue-400 text-[11px] font-bold">USD ${item.price.toFixed(2)} c/u</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <div class="flex items-center bg-[#0a1120] border border-gray-600 rounded">
+                                    <button onclick="updateCartQuantity(${index}, -1)" class="w-7 h-7 text-gray-300 flex items-center justify-center hover:bg-gray-700 transition">-</button>
+                                    <span class="text-xs w-6 text-center font-bold">${item.quantity}</span>
+                                    <button onclick="updateCartQuantity(${index}, 1)" class="w-7 h-7 text-gray-300 flex items-center justify-center hover:bg-gray-700 transition">+</button>
+                                </div>
+                                <span class="text-white text-xs font-bold">= USD ${subtotal.toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition p-1"><i class="fas fa-trash text-sm"></i></button>
+                    </div>
+                `;
+            });
+
+            cartTotalEl.innerText = `USD ${total.toFixed(2)}`;
+            cartBadge.innerText = count;
+        }
+
+        // Enviar pedido armado por WhatsApp
+        function sendOrderToWhatsApp() {
+            if (cart.length === 0) {
+                alert("Tu carrito está vacío. Agregá productos para continuar.");
+                return;
+            }
+
+            let text = "¡Hola BASSE! Vengo de su página web y quiero confirmar este pedido:%0A%0A";
+            let total = 0;
+
+            cart.forEach(item => {
+                let subtotal = item.price * item.quantity;
+                total += subtotal;
+                text += `🛍️ *${item.quantity}x ${item.name}* (USD ${item.price.toFixed(2)} c/u) = USD ${subtotal.toFixed(2)}%0A`;
+            });
+
+            text += `%0A💰 *TOTAL DEL PEDIDO: USD ${total.toFixed(2)}*%0A%0A`;
+            text += "Por favor, indíquenme cómo procedemos con el pago, la personalización y el envío. ¡Gracias!";
+
+            const url = `https://wa.me/1151196850?text=${text}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
