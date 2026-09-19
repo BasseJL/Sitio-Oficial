@@ -146,13 +146,20 @@
             </div>
         </div>
         
-        <div class="border-t border-white/5 bg-[#040811]">
+        <div class="border-t border-white/5 bg-[#040811] relative z-[90]">
             <div class="container mx-auto px-4 flex justify-center">
-                <ul class="flex space-x-8 text-xs font-semibold py-3 text-gray-300">
-                    <li><a href="#gorros" class="hover:text-white flex items-center transition">Categorías <i class="fas fa-chevron-down ml-1 text-[10px]"></i></a></li>
-                    <li><a href="#termos" class="hover:text-white transition">Tienda Oficial</a></li>
-                    <li><a href="#verano" class="hover:text-white transition">Verano</a></li>
-                    <li><a href="https://wa.me/1151196850?text=Hola,%20necesito%20ayuda%20o%20tengo%20una%20consulta%20sobre%20los%20productos." target="_blank" class="hover:text-white transition">Ayuda</a></li>
+                <ul class="flex space-x-8 text-xs font-semibold text-gray-300">
+                    <!-- Categorías con Dropdown -->
+                    <li class="group relative py-3 -my-3">
+                        <a class="hover:text-white flex items-center transition cursor-pointer py-3">Categorías <i class="fas fa-chevron-down ml-1 text-[10px]"></i></a>
+                        <div class="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-48 bg-[#0b1320] border border-white/10 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] py-2">
+                            <a href="#gorros" class="block px-4 py-3 text-gray-300 hover:bg-[#3b82f6] hover:text-white transition">Gorros y Gorras</a>
+                            <a href="#termos" class="block px-4 py-3 text-gray-300 hover:bg-[#3b82f6] hover:text-white transition">Termos y Vasos</a>
+                            <a href="#tecnologia" class="block px-4 py-3 text-gray-300 hover:bg-[#3b82f6] hover:text-white transition">Tecnología y Hogar</a>
+                        </div>
+                    </li>
+                    <li class="py-3"><a href="#verano" class="hover:text-white transition">Verano</a></li>
+                    <li class="py-3"><a href="https://wa.me/1151196850?text=Hola,%20necesito%20ayuda%20o%20tengo%20una%20consulta%20sobre%20los%20productos." target="_blank" class="hover:text-white transition">Ayuda</a></li>
                 </ul>
             </div>
         </div>
@@ -199,180 +206,185 @@
             </div>
         </div>
 
-        <!-- ================= GORROS Y GORRAS ================= -->
-        <section id="gorros" class="pt-4">
-            <div class="mb-6">
-                <h2 class="text-xl font-bold text-white flex items-center">
-                    <i class="fas fa-hat-cowboy text-blue-400 mr-2"></i> Gorros y Gorras
-                </h2>
-                <div class="category-line"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="productList1">
-                <div class="product-card flex flex-col" onclick="openModal('modal-six')">
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.13 (1).jpeg" alt="Gorro Six Classic" class="max-h-full object-contain">
-                    </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">GORRO SIX CLASSIC</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 2.10</p>
-                    </div>
-                </div>
-
-                <div class="product-card flex flex-col" onclick="openModal('modal-legion')">
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.07 (3).jpeg" alt="Gorro Legión" class="max-h-full object-contain">
-                    </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">GORRO LEGIÓN</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 1.65</p>
-                    </div>
-                </div>
-
-                <div class="product-card flex flex-col relative" onclick="openModal('modal-borin')">
-                    <div class="absolute top-0 left-0 bg-teal-500 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">DESTACADO</div>
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="85617585-6fe4-42da-9b62-9a62b7be68a9.jpg" alt="Gorro Borin" class="max-h-full object-contain">
-                    </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">GORRO BORIN</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 2.40</p>
-                    </div>
-                </div>
-
-                <div class="product-card flex flex-col relative" onclick="openModal('modal-flex')">
-                    <div class="absolute top-0 left-0 bg-blue-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">FLEX FIT</div>
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.21 (1).jpeg" alt="Gorro Flex" class="max-h-full object-contain">
-                    </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">GORRO FLEX</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 1.98</p>
-                    </div>
-                </div>
-
-                <div class="product-card flex flex-col" onclick="openModal('modal-urbano')">
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.22.jpeg" alt="Gorro Urbano" class="max-h-full object-contain">
-                    </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">GORRO URBANO</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 2.50</p>
-                    </div>
-                </div>
-
-                <div class="product-card flex flex-col relative" onclick="openModal('modal-trucker')">
-                    <div class="absolute top-0 left-0 bg-purple-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">MÁS VENDIDO</div>
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="3e20c8ed-809b-4b1b-b205-72c246cf3fa7.jpg" alt="Gorro Trucker" class="max-h-full object-contain">
-                    </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">GORRO TRUCKER</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 1.20</p>
-                    </div>
-                </div>
-
-                <div class="product-card flex flex-col relative" onclick="openModal('modal-tc')">
-                    <div class="absolute top-0 left-0 bg-green-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">BASSIC</div>
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.12 (1).jpeg" alt="Gorro TC Bassic" class="max-h-full object-contain">
-                    </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">GORRO TC BASSIC</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 1.25</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= TERMOS Y VASOS ================= -->
-        <section id="termos" class="pt-4">
-            <div class="mb-6">
-                <h2 class="text-xl font-bold text-white flex items-center">
-                    <i class="fas fa-mug-hot text-orange-500 mr-2"></i> Termos y Vasos
-                </h2>
-                <div class="category-line"></div>
-            </div>
+        <!-- ================= SECCIÓN VERANO (Agrupa Gorros y Termos) ================= -->
+        <div id="verano">
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="productList2">
-                <div class="product-card flex flex-col" onclick="openModal('modal-termo-prime')">
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.54.jpeg" class="max-h-full object-contain">
-                    </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">TERMO ACERO PRIME</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 11.98</p>
-                    </div>
+            <!-- ================= GORROS Y GORRAS ================= -->
+            <section id="gorros" class="pt-4">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-white flex items-center">
+                        <i class="fas fa-hat-cowboy text-blue-400 mr-2"></i> Gorros y Gorras
+                    </h2>
+                    <div class="category-line"></div>
                 </div>
 
-                <div class="product-card flex flex-col" onclick="openModal('modal-termo-medio')">
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="termo-medio-negro.jpg" class="max-h-full object-contain">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="productList1">
+                    <div class="product-card flex flex-col" onclick="openModal('modal-six')">
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.13 (1).jpeg" alt="Gorro Six Classic" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">GORRO SIX CLASSIC</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 2.10</p>
+                        </div>
                     </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">TERMO 1/2 LITRO</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 9.78</p>
-                    </div>
-                </div>
 
-                <div class="product-card flex flex-col" onclick="openModal('modal-brandly')">
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.56.jpeg" class="max-h-full object-contain">
+                    <div class="product-card flex flex-col" onclick="openModal('modal-legion')">
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.07 (3).jpeg" alt="Gorro Legión" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">GORRO LEGIÓN</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 1.65</p>
+                        </div>
                     </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">TERMO BRANDLY</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 16.98</p>
-                    </div>
-                </div>
 
-                <div class="product-card flex flex-col" onclick="openModal('modal-duglas')">
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.56 (1).jpeg" class="max-h-full object-contain">
+                    <div class="product-card flex flex-col relative" onclick="openModal('modal-borin')">
+                        <div class="absolute top-0 left-0 bg-teal-500 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">DESTACADO</div>
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="85617585-6fe4-42da-9b62-9a62b7be68a9.jpg" alt="Gorro Borin" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">GORRO BORIN</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 2.40</p>
+                        </div>
                     </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">VASO DUGLAS</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 3.80</p>
-                    </div>
-                </div>
 
-                <div class="product-card flex flex-col" onclick="openModal('modal-trek')">
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="WhatsApp Image 2026-09-15 at 20.41.57.jpeg" class="max-h-full object-contain">
+                    <div class="product-card flex flex-col relative" onclick="openModal('modal-flex')">
+                        <div class="absolute top-0 left-0 bg-blue-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">FLEX FIT</div>
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.21 (1).jpeg" alt="Gorro Flex" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">GORRO FLEX</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 1.98</p>
+                        </div>
                     </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">VASO TERMICO TREK</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 13.64</p>
-                    </div>
-                </div>
 
-                <div class="product-card flex flex-col relative" onclick="openModal('modal-kelprer')">
-                    <div class="absolute top-0 left-0 bg-purple-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">1050 ML</div>
-                    <div class="image-box h-56 flex items-center justify-center">
-                        <img src="cdb6e462-e080-49cf-a20e-e1e73b03d0a7.jpg" class="max-h-full object-contain">
+                    <div class="product-card flex flex-col" onclick="openModal('modal-urbano')">
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.22.jpeg" alt="Gorro Urbano" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">GORRO URBANO</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 2.50</p>
+                        </div>
                     </div>
-                    <div class="p-4 flex flex-col flex-1">
-                        <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
-                        <h3 class="text-sm font-bold text-white mb-1">VASO TERMICO KELPRER</h3>
-                        <p class="text-xs text-white font-bold mb-2">USD 22.11</p>
+
+                    <div class="product-card flex flex-col relative" onclick="openModal('modal-trucker')">
+                        <div class="absolute top-0 left-0 bg-purple-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">MÁS VENDIDO</div>
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="3e20c8ed-809b-4b1b-b205-72c246cf3fa7.jpg" alt="Gorro Trucker" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">GORRO TRUCKER</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 1.20</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card flex flex-col relative" onclick="openModal('modal-tc')">
+                        <div class="absolute top-0 left-0 bg-green-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">BASSIC</div>
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.12 (1).jpeg" alt="Gorro TC Bassic" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-blue-400 uppercase font-bold mb-1">GORROS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">GORRO TC BASSIC</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 1.25</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <!-- ================= TERMOS Y VASOS ================= -->
+            <section id="termos" class="pt-12">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-white flex items-center">
+                        <i class="fas fa-mug-hot text-orange-500 mr-2"></i> Termos y Vasos
+                    </h2>
+                    <div class="category-line"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="productList2">
+                    <div class="product-card flex flex-col" onclick="openModal('modal-termo-prime')">
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.54.jpeg" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">TERMO ACERO PRIME</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 11.98</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card flex flex-col" onclick="openModal('modal-termo-medio')">
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="termo-medio-negro.jpg" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">TERMO 1/2 LITRO</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 9.78</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card flex flex-col" onclick="openModal('modal-brandly')">
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.56.jpeg" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">TERMOS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">TERMO BRANDLY</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 16.98</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card flex flex-col" onclick="openModal('modal-duglas')">
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.56 (1).jpeg" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">VASO DUGLAS</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 3.80</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card flex flex-col" onclick="openModal('modal-trek')">
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="WhatsApp Image 2026-09-15 at 20.41.57.jpeg" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">VASO TERMICO TREK</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 13.64</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card flex flex-col relative" onclick="openModal('modal-kelprer')">
+                        <div class="absolute top-0 left-0 bg-purple-600 text-white text-[9px] font-bold px-2 py-1 z-10 uppercase tracking-wider">1050 ML</div>
+                        <div class="image-box h-56 flex items-center justify-center">
+                            <img src="cdb6e462-e080-49cf-a20e-e1e73b03d0a7.jpg" class="max-h-full object-contain">
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <p class="text-[10px] text-orange-400 uppercase font-bold mb-1">VASOS</p>
+                            <h3 class="text-sm font-bold text-white mb-1">VASO TERMICO KELPRER</h3>
+                            <p class="text-xs text-white font-bold mb-2">USD 22.11</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- ================= FIN SECCIÓN VERANO ================= -->
 
         <!-- ================= TECNOLOGÍA Y HOGAR ================= -->
-        <section id="tecnologia" class="pt-4">
+        <section id="tecnologia" class="pt-12">
             <div class="mb-6">
                 <h2 class="text-xl font-bold text-white flex items-center">
                     <i class="fas fa-microchip text-teal-400 mr-2"></i> Tecnología y Hogar
@@ -517,7 +529,7 @@
                                 <i class="fab fa-whatsapp text-green-500 mr-2 text-lg"></i> 11 5119-6850
                             </a>
                         </li>
-                        <li class="flex items-center"><i class="far fa-envelope text-blue-500 mr-2"></i> ventas@basse.com</li>
+                        <li class="flex items-center"><i class="far fa-envelope text-blue-500 mr-2"></i> bassejl718@gmail.com</li>
                         <li class="flex items-center"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i> Buenos Aires, Argentina</li>
                     </ul>
                 </div>
