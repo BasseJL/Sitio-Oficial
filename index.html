@@ -115,7 +115,7 @@
     <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] hidden"></div>
 
     <!-- Botón Flotante WhatsApp -->
-    <a href="https://wa.me/1151196850?text=Hola,%20tengo%20una%20consulta%20desde%20la%20página%20web" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-[0_4px_10px_rgba(37,211,102,0.5)] hover:scale-110 transition-transform z-[80]">
+    <a href="https://wa.me/5491151196850?text=Hola,%20tengo%20una%20consulta%20desde%20la%20página%20web" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-[0_4px_10px_rgba(37,211,102,0.5)] hover:scale-110 transition-transform z-[80]">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -149,7 +149,6 @@
         <div class="border-t border-white/5 bg-[#040811] relative z-[90]">
             <div class="container mx-auto px-4 flex justify-center">
                 <ul class="flex space-x-8 text-xs font-semibold text-gray-300">
-                    <!-- Categorías con Dropdown -->
                     <li class="group relative py-3 -my-3">
                         <a class="hover:text-white flex items-center transition cursor-pointer py-3">Categorías <i class="fas fa-chevron-down ml-1 text-[10px]"></i></a>
                         <div class="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-48 bg-[#0b1320] border border-white/10 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[100] py-2">
@@ -159,7 +158,7 @@
                         </div>
                     </li>
                     <li class="py-3"><a href="#verano" class="hover:text-white transition">Verano</a></li>
-                    <li class="py-3"><a href="https://wa.me/1151196850?text=Hola,%20necesito%20ayuda%20o%20tengo%20una%20consulta%20sobre%20los%20productos." target="_blank" class="hover:text-white transition">Ayuda</a></li>
+                    <li class="py-3"><a href="https://wa.me/5491151196850?text=Hola,%20necesito%20ayuda%20o%20tengo%20una%20consulta%20sobre%20los%20productos." target="_blank" class="hover:text-white transition">Ayuda</a></li>
                 </ul>
             </div>
         </div>
@@ -206,9 +205,7 @@
             </div>
         </div>
 
-        <!-- ================= SECCIÓN VERANO (Agrupa Gorros y Termos) ================= -->
         <div id="verano">
-            
             <!-- ================= GORROS Y GORRAS ================= -->
             <section id="gorros" class="pt-4">
                 <div class="mb-6">
@@ -381,7 +378,6 @@
                 </div>
             </section>
         </div>
-        <!-- ================= FIN SECCIÓN VERANO ================= -->
 
         <!-- ================= TECNOLOGÍA Y HOGAR ================= -->
         <section id="tecnologia" class="pt-12">
@@ -447,7 +443,6 @@
         <div class="container mx-auto px-4 max-w-6xl">
             <h2 class="text-3xl font-extrabold text-white text-center mb-10"><span class="text-[#3b82f6]">¡Llevá tu tecnología</span> a otro nivel con BASSE!</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Tarjeta Auriculares -->
                 <div class="bg-[#0f172a] border border-white/5 rounded-lg p-8 flex flex-col justify-between shadow-lg">
                     <div>
                         <p class="text-[10px] text-teal-400 font-bold uppercase tracking-wider mb-2">AUDIO PREMIUM</p>
@@ -456,7 +451,6 @@
                     </div>
                     <button onclick="openModal('modal-auriculares')" class="bg-[#0ea5e9] hover:bg-blue-500 text-white font-bold py-2 px-6 rounded w-max transition shadow-md">Ver Producto</button>
                 </div>
-                <!-- Tarjeta Parlante -->
                 <div class="bg-[#0f172a] border border-white/5 rounded-lg p-8 flex flex-col justify-between shadow-lg">
                     <div>
                         <p class="text-[10px] text-teal-400 font-bold uppercase tracking-wider mb-2">SONIDO PORTÁTIL</p>
@@ -492,16 +486,14 @@
         </div>
     </div>
 
-    <!-- FOOTER / PIE DE PÁGINA -->
+    <!-- FOOTER -->
     <footer class="bg-[#020408] border-t border-white/10 pt-12 pb-8">
         <div class="container mx-auto px-4 max-w-6xl">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <!-- Marca -->
                 <div>
                     <h4 class="text-xl font-extrabold text-white mb-4 flex items-center"><i class="fas fa-bolt text-blue-500 mr-2"></i> BASSE</h4>
                     <p class="text-gray-400 text-sm">Especialistas en artículos promocionales, merchandising corporativo y tecnología. Llevamos tu marca al siguiente nivel.</p>
                 </div>
-                <!-- Menú rápido -->
                 <div>
                     <h4 class="text-white font-bold mb-4">Navegación</h4>
                     <ul class="text-gray-400 text-sm space-y-2">
@@ -510,7 +502,6 @@
                         <li><a href="#tecnologia" class="hover:text-blue-400 transition">Tecnología y Hogar</a></li>
                     </ul>
                 </div>
-                <!-- Legal -->
                 <div>
                     <h4 class="text-white font-bold mb-4">Información Legal</h4>
                     <ul class="text-gray-400 text-sm space-y-2">
@@ -520,12 +511,11 @@
                         <li><a href="#" class="hover:text-blue-400 transition">Defensa del Consumidor</a></li>
                     </ul>
                 </div>
-                <!-- Contacto -->
                 <div>
                     <h4 class="text-white font-bold mb-4">Contacto Directo</h4>
                     <ul class="text-gray-400 text-sm space-y-3">
                         <li>
-                            <a href="https://wa.me/1151196850" target="_blank" class="flex items-center hover:text-green-400 transition">
+                            <a href="https://wa.me/5491151196850" target="_blank" class="flex items-center hover:text-green-400 transition">
                                 <i class="fab fa-whatsapp text-green-500 mr-2 text-lg"></i> 11 5119-6850
                             </a>
                         </li>
@@ -542,37 +532,35 @@
 
 
     <!-- ========================================== -->
-    <!-- MODALS CON CARRITO INTEGRAD0 -->
+    <!-- MODALS ACTUALIZADOS CON DISEÑO OSCURO -->
     <!-- ========================================== -->
 
     <!-- MODAL SIX CLASSIC -->
     <div id="modal-six" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-six')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-six" src="WhatsApp Image 2026-09-15 at 20.41.13 (1).jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.11 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#800020] border border-gray-300" title="Bordó"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.11.jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#00aa55] border border-gray-300" title="Verde"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.13 (1).jpeg', this, 'img-six')" class="color-swatch active w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-300" title="Beige"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-gray-100 border border-gray-300" title="Blanco"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14 (2).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#013220] border border-gray-300" title="Verde Oscuro"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#d1d5db] border border-gray-300" title="Gris Claro"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (2).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300" title="Negro"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (3).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#4b4f54] border border-gray-300" title="Gris Oscuro"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.16 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-300" title="Azul"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.16.jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#dc2626] border border-gray-300" title="Rojo"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.11 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#800020] border border-gray-400" title="Bordó"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.11.jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#00aa55] border border-gray-400" title="Verde"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.13 (1).jpeg', this, 'img-six')" class="color-swatch active w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-400" title="Beige"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-gray-100 border border-gray-400" title="Blanco"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14 (2).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#013220] border border-gray-400" title="Verde Oscuro"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#d1d5db] border border-gray-400" title="Gris Claro"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (2).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-400" title="Negro"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.15 (3).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#4b4f54] border border-gray-400" title="Gris Oscuro"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.16 (1).jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-400" title="Azul"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.16.jpeg', this, 'img-six')" class="color-swatch w-8 h-8 rounded-sm bg-[#dc2626] border border-gray-400" title="Rojo"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-six')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Six Classic</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 2.10</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro 6 gajos poliéster con hebilla metálica ajustable. Ideal para merchandising corporativo.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -591,34 +579,32 @@
     <!-- MODAL LEGIÓN -->
     <div id="modal-legion" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-legion')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-legion" src="WhatsApp Image 2026-09-15 at 20.41.07 (3).jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-2 justify-center">
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.03 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#0a192f] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#d2b48c] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-400 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-100 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.05.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-300 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#800020] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-blue-500 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-green-700 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#0f172a] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (3).jpeg', this, 'img-legion')" class="color-swatch active w-6 h-6 rounded-sm bg-red-600 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.03 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#0a192f] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#d2b48c] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-400 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.04.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-100 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.05.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#1e3a8a] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gray-300 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#800020] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.06.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-blue-500 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (1).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-green-700 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (2).jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-[#0f172a] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07 (3).jpeg', this, 'img-legion')" class="color-swatch active w-6 h-6 rounded-sm bg-red-600 border border-gray-400"></button>
                     <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.07.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-black border border-gray-400"></button>
                     <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.08.jpeg', this, 'img-legion')" class="color-swatch w-6 h-6 rounded-sm bg-gradient-to-b from-white to-black border border-gray-400"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-legion')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Legión</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 1.65</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro trucker de 5 gajos con red trasera fresca y cierre ajustable a presión.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -637,27 +623,25 @@
     <!-- MODAL BORIN -->
     <div id="modal-borin" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-borin')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-borin" src="85617585-6fe4-42da-9b62-9a62b7be68a9.jpg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeColor('85617585-6fe4-42da-9b62-9a62b7be68a9.jpg', this, 'img-borin')" class="color-swatch active w-8 h-8 rounded-sm bg-[#800020] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.18 (1).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.18.jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (1).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-gray-500 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (2).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-gray-200 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19.jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
+                    <button onclick="changeColor('85617585-6fe4-42da-9b62-9a62b7be68a9.jpg', this, 'img-borin')" class="color-swatch active w-8 h-8 rounded-sm bg-[#800020] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.18 (1).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.18.jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (1).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-gray-500 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (2).jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-gray-200 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19.jpeg', this, 'img-borin')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-400"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-borin')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Borin</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 2.40</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro trucker de 6 gajos con panel frontal reforzado.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -676,27 +660,25 @@
     <!-- MODAL FLEX -->
     <div id="modal-flex" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-flex')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-flex" src="WhatsApp Image 2026-09-15 at 20.41.21 (1).jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (3).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-gradient-to-r from-red-500 to-blue-500 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (1).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (2).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-gray-600 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (3).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.21 (1).jpeg', this, 'img-flex')" class="color-swatch active w-8 h-8 rounded-sm bg-green-700 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.21.jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.19 (3).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-gradient-to-r from-red-500 to-blue-500 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (1).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (2).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-gray-600 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.20 (3).jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-[#d2b48c] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.21 (1).jpeg', this, 'img-flex')" class="color-swatch active w-8 h-8 rounded-sm bg-green-700 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.21.jpeg', this, 'img-flex')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-400"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-flex')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Flex</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 1.98</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro cerrado de alta calidad con banda elástica interna para ajuste perfecto.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -715,28 +697,26 @@
     <!-- MODAL URBANO -->
     <div id="modal-urbano" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-urbano')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-urbano" src="WhatsApp Image 2026-09-15 at 20.41.22.jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeColor('84c16944-9d59-4800-bc75-7cfca4d15eb3.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
-                    <button onclick="changeColor('91c83b0e-1266-4027-9f7f-958d8c3ebb19.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-300"></button>
-                    <button onclick="changeColor('310c928f-192d-41d7-83e2-1cd67cb55760.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-300"></button>
-                    <button onclick="changeColor('882dc6ed-7961-4262-9ae4-6c31c597ec5c.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.22.jpeg', this, 'img-urbano')" class="color-swatch active w-8 h-8 rounded-sm bg-pink-400 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.23 (1).jpeg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-[#800020] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.23.jpeg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-green-700 border border-gray-300"></button>
+                    <button onclick="changeColor('84c16944-9d59-4800-bc75-7cfca4d15eb3.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-400"></button>
+                    <button onclick="changeColor('91c83b0e-1266-4027-9f7f-958d8c3ebb19.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-blue-600 border border-gray-400"></button>
+                    <button onclick="changeColor('310c928f-192d-41d7-83e2-1cd67cb55760.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-400"></button>
+                    <button onclick="changeColor('882dc6ed-7961-4262-9ae4-6c31c597ec5c.jpg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.22.jpeg', this, 'img-urbano')" class="color-swatch active w-8 h-8 rounded-sm bg-pink-400 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.23 (1).jpeg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-[#800020] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.23.jpeg', this, 'img-urbano')" class="color-swatch w-8 h-8 rounded-sm bg-green-700 border border-gray-400"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-urbano')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Urbano</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 2.50</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro de gabardina premium con cierre ajustable de hebilla metálica trasera.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -755,27 +735,25 @@
     <!-- MODAL TRUCKER -->
     <div id="modal-trucker" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-trucker')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-trucker" src="3e20c8ed-809b-4b1b-b205-72c246cf3fa7.jpg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeColor('3e20c8ed-809b-4b1b-b205-72c246cf3fa7.jpg', this, 'img-trucker')" class="color-swatch active w-8 h-8 rounded-sm bg-green-500 border border-gray-300"></button>
+                    <button onclick="changeColor('3e20c8ed-809b-4b1b-b205-72c246cf3fa7.jpg', this, 'img-trucker')" class="color-swatch active w-8 h-8 rounded-sm bg-green-500 border border-gray-400"></button>
                     <button onclick="changeColor('530f450b-ebc2-4777-a54d-7983cbb8663b.jpg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-400"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (1).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (2).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (3).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17.jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-gradient-to-r from-blue-900 via-white to-red-600 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (1).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (2).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17 (3).jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.17.jpeg', this, 'img-trucker')" class="color-swatch w-8 h-8 rounded-sm bg-gradient-to-r from-blue-900 via-white to-red-600 border border-gray-400"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-trucker')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">Gorro Trucker</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 1.20</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Diseñado con panel frontal de poliéster blanco especial para sublimación y red trasera.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -794,26 +772,24 @@
     <!-- MODAL TC BASSIC -->
     <div id="modal-tc" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-tc')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-tc" src="WhatsApp Image 2026-09-15 at 20.41.12 (1).jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12 (1).jpeg', this, 'img-tc')" class="color-swatch active w-8 h-8 rounded-sm bg-yellow-400 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12 (2).jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.13.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-blue-500 border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12 (1).jpeg', this, 'img-tc')" class="color-swatch active w-8 h-8 rounded-sm bg-yellow-400 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12 (2).jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-red-600 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.12.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.13.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-black border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.14.jpeg', this, 'img-tc')" class="color-swatch w-8 h-8 rounded-sm bg-blue-500 border border-gray-400"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-tc')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">GORRO TC BASSIC</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 1.25</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Gorro 5 gajos poliéster con cierre velcro.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -837,24 +813,22 @@
     <!-- MODAL TERMO ACERO PRIME -->
     <div id="modal-termo-prime" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-termo-prime')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-prime" src="WhatsApp Image 2026-09-15 at 20.41.54.jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54.jpeg', this, 'img-prime')" class="color-swatch active w-8 h-8 rounded-sm bg-gray-800 border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54 (1).jpeg', this, 'img-prime')" class="color-swatch w-8 h-8 rounded-sm bg-white border border-gray-300"></button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54 (2).jpeg', this, 'img-prime')" class="color-swatch w-8 h-8 rounded-sm bg-[#9ca3af] border border-gray-300"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54.jpeg', this, 'img-prime')" class="color-swatch active w-8 h-8 rounded-sm bg-gray-800 border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54 (1).jpeg', this, 'img-prime')" class="color-swatch w-8 h-8 rounded-sm bg-white border border-gray-400"></button>
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.54 (2).jpeg', this, 'img-prime')" class="color-swatch w-8 h-8 rounded-sm bg-[#9ca3af] border border-gray-400"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-termo-prime')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">TERMO ACERO PRIME</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 11.98</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Termo de acero inoxidable 1 litro. Práctico tapón hermético matero. Mantiene calor x 24 hs.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -873,25 +847,23 @@
     <!-- MODAL TERMO MEDIO LITRO -->
     <div id="modal-termo-medio" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-termo-medio')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-medio" src="termo-medio-negro.jpg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-3 justify-center">
-                    <button onclick="changeColor('termo-medio-negro.jpg', this, 'img-medio')" class="color-swatch active w-8 h-8 rounded-sm bg-black border border-gray-300"></button>
-                    <button onclick="changeColor('termo-medio-acero.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-[#9ca3af] border border-gray-300"></button>
-                    <button onclick="changeColor('termo-medio-blanco.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-white border border-gray-300"></button>
-                    <button onclick="changeColor('termo-medio-azul.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-300"></button>
+                    <button onclick="changeColor('termo-medio-negro.jpg', this, 'img-medio')" class="color-swatch active w-8 h-8 rounded-sm bg-black border border-gray-400"></button>
+                    <button onclick="changeColor('termo-medio-acero.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-[#9ca3af] border border-gray-400"></button>
+                    <button onclick="changeColor('termo-medio-blanco.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-white border border-gray-400"></button>
+                    <button onclick="changeColor('termo-medio-azul.jpg', this, 'img-medio')" class="color-swatch w-8 h-8 rounded-sm bg-[#1e3a8a] border border-gray-400"></button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-termo-medio')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">TERMO 1/2 LITRO</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 9.78</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Termo de acero inoxidable 1/2 litro. Práctico tapón hermético matero.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -910,19 +882,18 @@
     <!-- MODAL BRANDLY -->
     <div id="modal-brandly" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-brandly')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <!-- SIN mb-6 PORQUE NO HAY COLORES -->
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4" style="height: 300px;">
                     <img id="img-brandly" src="WhatsApp Image 2026-09-15 at 20.41.56.jpeg" class="max-h-full object-contain">
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-brandly')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">TERMO BRANDLY</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 16.98</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Termo de acero inox con doble capa. Tapón cebador 360 grados. Capacidad 1.2L.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -941,19 +912,17 @@
     <!-- MODAL DUGLAS -->
     <div id="modal-duglas" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-duglas')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4" style="height: 300px;">
                     <img id="img-duglas" src="WhatsApp Image 2026-09-15 at 20.41.56 (1).jpeg" class="max-h-full object-contain">
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-duglas')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">VASO DUGLAS</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 3.80</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Vaso de acero con tapa de silicona. Cobertura antideslizante. Capacidad 500 cc.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -972,27 +941,25 @@
     <!-- MODAL VASO TREK -->
     <div id="modal-trek" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-trek')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
                     <img id="img-trek" src="WhatsApp Image 2026-09-15 at 20.41.57.jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
                 <div class="flex flex-wrap gap-4 justify-center mt-2">
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.57.jpeg', this, 'img-trek')" class="tech-thumb active w-14 h-14 bg-white border border-gray-200 p-1">
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.57.jpeg', this, 'img-trek')" class="tech-thumb active w-14 h-14 bg-white border border-gray-400 p-1 rounded-md">
                         <img src="WhatsApp Image 2026-09-15 at 20.41.57.jpeg" class="max-h-full object-contain">
                     </button>
-                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.57 (1).jpeg', this, 'img-trek')" class="tech-thumb w-14 h-14 bg-white border border-gray-200 p-1">
+                    <button onclick="changeColor('WhatsApp Image 2026-09-15 at 20.41.57 (1).jpeg', this, 'img-trek')" class="tech-thumb w-14 h-14 bg-white border border-gray-400 p-1 rounded-md">
                         <img src="WhatsApp Image 2026-09-15 at 20.41.57 (1).jpeg" class="max-h-full object-contain">
                     </button>
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative overflow-y-auto" style="max-height: 90vh;">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative overflow-y-auto" style="max-height: 90vh;">
                 <button onclick="closeModal('modal-trek')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">VASO TERMICO TREK</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 13.64</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Vaso térmico aislado al vacío. Mantiene calientes por 12hs y frías por 6hs.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -1011,19 +978,17 @@
     <!-- MODAL VASO KELPRER -->
     <div id="modal-kelprer" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-kelprer')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4" style="height: 300px;">
                     <img id="img-kelprer" src="cdb6e462-e080-49cf-a20e-e1e73b03d0a7.jpg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative overflow-y-auto" style="max-height: 90vh;">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative overflow-y-auto" style="max-height: 90vh;">
                 <button onclick="closeModal('modal-kelprer')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">VASO TERMICO KELPRER</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-4">USD 22.11</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Vaso térmico estilo americano. Capacidad 1050 ML.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -1047,19 +1012,17 @@
     <!-- MODAL SACACORCHOS -->
     <div id="modal-sacacorchos" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-sacacorchos')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4" style="height: 300px;">
                     <img id="img-saca" src="WhatsApp Image 2026-09-15 at 20.42.29.jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-sacacorchos')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">SACA CORCHOS AUTO</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 29.98</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Sacacorchos de vino automático con cortador de lámina de aluminio. Batería recargable USB incluida.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -1078,19 +1041,17 @@
     <!-- MODAL PARLANTE -->
     <div id="modal-parlante" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-parlante')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4" style="height: 300px;">
                     <img id="img-parlante" src="WhatsApp Image 2026-09-15 at 20.42.31 (2).jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-parlante')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">PARLANTE BLACKPUNK</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 33.90</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Parlante inalámbrico bluetooth con soporte porta celular, lector Micro SD, USB y radio FM.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -1109,19 +1070,17 @@
     <!-- MODAL AURICULARES -->
     <div id="modal-auriculares" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-auriculares')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4" style="height: 300px;">
                     <img id="img-auri" src="WhatsApp Image 2026-09-15 at 20.42.29 (2).jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-auriculares')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">AURICULARES SQUARE</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 14.50</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Auriculares airbuds SQUARE con display digital iluminado de carga. Tecnología ENC.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -1140,19 +1099,18 @@
     <!-- MODAL RELOJ -->
     <div id="modal-reloj" class="modal fixed inset-0 z-[100] flex items-center justify-center px-4">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('modal-reloj')"></div>
-        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-lg overflow-hidden">
-            <div class="w-full md:w-1/2 p-8 bg-white flex flex-col items-center justify-center">
-                <div class="border border-gray-200 w-full flex items-center justify-center p-4 mb-6" style="height: 300px;">
+        <div class="modal-content relative w-full max-w-4xl flex flex-col md:flex-row shadow-2xl rounded-xl overflow-hidden bg-[#0b1320]">
+            <div class="w-full md:w-1/2 p-8 bg-[#0f172a] flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/5">
+                <!-- SIN mb-6 PORQUE NO HAY COLORES AQUÍ -->
+                <div class="bg-white rounded-lg shadow-inner w-full flex items-center justify-center p-4" style="height: 300px;">
                     <img id="img-reloj" src="WhatsApp Image 2026-09-15 at 20.42.32.jpeg" class="max-h-full object-contain transition-opacity duration-300">
                 </div>
             </div>
-            <div class="w-full md:w-1/2 p-10 bg-[#0b1320] flex flex-col justify-center relative">
+            <div class="w-full md:w-1/2 p-10 flex flex-col justify-center relative">
                 <button onclick="closeModal('modal-reloj')" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl"><i class="fas fa-times"></i></button>
                 <h2 class="text-3xl font-extrabold mb-2 text-white">RELOJ O´CLOCK</h2>
                 <p class="text-2xl text-[#3b82f6] font-bold mb-6">USD 4.70</p>
                 <p class="text-gray-400 mb-4 text-sm leading-relaxed">Reloj análogo de pared color blanco material plástico. Segundero silencioso.</p>
-                
-                <!-- Controles Carrito -->
                 <div class="flex items-center gap-4 mb-4 mt-auto">
                     <label class="text-sm text-gray-400 font-bold">Cantidad:</label>
                     <div class="flex items-center bg-[#0f172a] border border-gray-600 rounded overflow-hidden">
@@ -1237,13 +1195,11 @@
             });
         }
 
-
         // ==========================================
         // LÓGICA DEL CARRITO DE COMPRAS
         // ==========================================
         let cart = [];
 
-        // Cambiar cantidad dentro del modal
         function changeQuantityModal(id, delta) {
             const input = document.getElementById(`qty-${id}`);
             let val = parseInt(input.value) + delta;
@@ -1251,7 +1207,6 @@
             input.value = val;
         }
 
-        // Abrir/Cerrar menú lateral del carrito
         function toggleCart() {
             const drawer = document.getElementById('cart-drawer');
             const overlay = document.getElementById('cart-overlay');
@@ -1267,14 +1222,12 @@
             }
         }
 
-        // Agregar al carrito
         function addToCart(id, name, price, imageId) {
             const qtyInput = document.getElementById(`qty-${id}`);
             const quantity = parseInt(qtyInput.value);
             const imgElement = document.getElementById(imageId);
             const image = imgElement ? imgElement.src : '';
 
-            // Verificar si ya existe el producto con la misma foto/color
             const existingItemIndex = cart.findIndex(item => item.id === id && item.image === image);
             
             if (existingItemIndex > -1) {
@@ -1283,15 +1236,13 @@
                 cart.push({ id, name, price, quantity, image });
             }
 
-            // Reiniciar contador modal
             qtyInput.value = 1;
 
             updateCartUI();
             closeModal(`modal-${id}`);
-            toggleCart(); // Abre el carrito automáticamente para mostrar lo agregado
+            toggleCart(); 
         }
 
-        // Modificar cantidad dentro del carrito
         function updateCartQuantity(index, delta) {
             cart[index].quantity += delta;
             if (cart[index].quantity < 1) {
@@ -1300,13 +1251,11 @@
             updateCartUI();
         }
 
-        // Eliminar del carrito
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartUI();
         }
 
-        // Renderizar el carrito en HTML
         function updateCartUI() {
             const cartItemsContainer = document.getElementById('cart-items');
             const cartTotalEl = document.getElementById('cart-total');
@@ -1349,7 +1298,6 @@
             cartBadge.innerText = count;
         }
 
-        // Enviar pedido armado por WhatsApp
         function sendOrderToWhatsApp() {
             if (cart.length === 0) {
                 alert("Tu carrito está vacío. Agregá productos para continuar.");
@@ -1368,7 +1316,7 @@
             text += `%0A💰 *TOTAL DEL PEDIDO: USD ${total.toFixed(2)}*%0A%0A`;
             text += "Por favor, indíquenme cómo procedemos con el pago, la personalización y el envío. ¡Gracias!";
 
-            const url = `https://wa.me/1151196850?text=${text}`;
+            const url = `https://wa.me/5491151196850?text=${text}`;
             window.open(url, '_blank');
         }
     </script>
